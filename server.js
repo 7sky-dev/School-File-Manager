@@ -1,10 +1,28 @@
 const express = require('express');
 const app = express();
+const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 const port = 4444;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.get('/', (req,res)=>{
-    res.sendFile(__dirname+'\\public\\index.html');
+    res.sendFile(__dirname+'\\public\\login.html');
+});
+
+app.post('/login', (req,res)=>{
+    const password = req.body.password;
+
+    bcrypt.compare(password, process.env.hash, (err, result) => {
+        if(result){
+            res.sendFile(__dirname+'\\public\\instruction.html');
+        }else{
+            res.sendFile(__dirname+'\\public\\error.html');
+        }
+    });
+    
 });
 
 app.listen(port, (err)=>{
