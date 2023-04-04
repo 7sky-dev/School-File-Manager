@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bcrypt = require('bcrypt');
 require('dotenv').config();
-app.use(express.static(__dirname + '/public')); //dopisalem ~serek (to jest zeby css dzialal)
+app.use(express.static(__dirname + '/public')); // (to jest zeby css dzialal)
 
 const port = 4444;
 
