@@ -1,40 +1,35 @@
 body{
-    background-color:#97806d;
+    background-color:#111111;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
 }
 
-
-.logowanie{
-    width:550px;
-    height:98vh;
-    background-color:#ac9889;
-    text-align:center;
-    text-decoration:none;
-    float:left;
-    border-radius:3%;
+.main{
+    width: 100vw;
+    height: 100vh;
 }
 
-.login{
-    padding-top:300px;
-}
-
-.instrukcja{
-    width:700px;
-    margin-left:10px;
-    height:98vh;
-    background-color:#c1b1a5;
-    text-decoration:none;
-    float:left;
-    border-radius:3%;
-}
-
-p{
-    font-family: Monospace;
-    font-size: 20px;
-    text-align: center;
+.login,.instrukcja{
+    background-color: #181717;
 }
 
 ol{
     font-size:25px;
     font-family:Sans-serif;
     padding-left:100px; 
+}
+
+.split{
+    height: 100%;
+    width: 100%;
+}
+
+h1{
+    text-align: center;
+}
+
+@media only screen and (max-width: 1250px)  {
+    .main{
+        flex-direction: column;
+    }
 }
