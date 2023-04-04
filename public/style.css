@@ -1,0 +1,39 @@
+body{
+    background-color:#eae4e0;
+}
+
+
+.logowanie{
+    width:40%;
+    height:100%;
+    background-color:#ac9889;
+    text-align:center;
+    text-decoration:none;
+    float:left;
+}
+
+.login{
+    padding-top:200px;
+}
+
+.instrukcja{
+    width:60%;
+    height:100%;
+    background-color:#c1b1a5;
+    text-decoration:none;
+    float:left;
+}
+
+p{
+    font-family: Monospace;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+
+ol{
+    font-size:25px;
+    font-family:Sans-serif;
+    padding-left:100px; 
+}
