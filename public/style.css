@@ -1,27 +1,30 @@
 body{
-    background-color:#eae4e0;
+    background-color:#97806d;
 }
 
 
 .logowanie{
-    width:40%;
-    height:500px;
+    width:550px;
+    height:98vh;
     background-color:#ac9889;
     text-align:center;
     text-decoration:none;
     float:left;
+    border-radius:3%;
 }
 
 .login{
-    padding-top:200px;
+    padding-top:300px;
 }
 
 .instrukcja{
-    width:60%;
-    height:500px;
+    width:700px;
+    margin-left:10px;
+    height:98vh;
     background-color:#c1b1a5;
     text-decoration:none;
     float:left;
+    border-radius:3%;
 }
 
 p{
@@ -29,8 +32,6 @@ p{
     font-size: 20px;
     text-align: center;
 }
-
-
 
 ol{
     font-size:25px;
