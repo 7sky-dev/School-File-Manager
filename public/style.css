@@ -13,6 +13,14 @@ body{
     background-color: #181717;
 }
 
+.login{
+    width: 500px;
+}
+.logowanie{
+    width: 66vw;
+}
+
+
 ol{
     font-size:25px;
     font-family:Sans-serif;
