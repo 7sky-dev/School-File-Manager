@@ -25,10 +25,11 @@
           <form class="d-flex flex-row" action="/sort">
           <div class="m-auto">Sortowanie wg. nauczyciela:</div>
           <div class="m-auto">
-            <select name="teacher" class="pl-4 pr-4 pt-2 pb-2 rounded">
+            <select name="teacher" class="pl-4 pr-4 pt-2 pb-2 form-select rounded">
               <% for(let i=0; i<dataTeachers.length; i++) {%>
                 <option value="<%=dataTeachers[i].teacher%>"><%=dataTeachers[i].teacher%></option>
               <% } %>
+              
             </select>
           </div>
           <div class="m-auto">
@@ -38,10 +39,10 @@
         </div>
         <div class="text-center">
           <ul>
-            <% for(let i=0; i<dataFiles.length; i++) {%>
+            <% for(let i=0; i<dataSorted.length; i++) {%>
               <li>
-                <b><%=dataFiles[i].teacher%>:</b>
-                <a href="files/<%=dataFiles[i].name%>"><%=dataFiles[i].name%></a>
+                <b><%=dataSorted[i].teacher%>:</b>
+                <a href="files/<%=dataSorted[i].name%>"><%=dataSorted[i].name%></a>
               </li>
             <% } %>
           </ul>
@@ -61,15 +62,15 @@
           </ol>
         </div>
         <div class="mt-auto mb-auto text-center">
-          <form ref="uploadForm" id="uploadForm" method="POST" action="/add" encType="multipart/form-data" class="d-flex flex-column align-items-center justify-content-center">
-            <select name="teacher" class="pl-2 pr-2 pt-2 pb-2 mt-2 rounded">
-              <% for(let i=0; i<dataTeachers.length; i++) {%>
-                <option value="<%=dataTeachers[i].teacher%>"><%=dataTeachers[i].teacher%></option>
-              <% } %>
-            </select>
-            <input type="file" name="fileName" class="w-75">
-            <input type="submit" class="btn btn-warning mt-2 w-75" value="Dodaj pliki">
-          </form>
+            <form ref="uploadForm" id="uploadForm" method="POST" action="/add" encType="multipart/form-data" class="d-flex flex-column align-items-center justify-content-center">
+                <select name="teacher" class="pl-2 pr-2 pt-2 pb-2 mt-2 rounded">
+                  <% for(let i=0; i<dataTeachers.length; i++) {%>
+                    <option value="<%=dataTeachers[i].teacher%>"><%=dataTeachers[i].teacher%></option>
+                  <% } %>
+                </select>
+                <input type="file" name="fileName" class="w-75">
+                <input type="submit" class="btn btn-warning mt-2 w-75" value="Dodaj pliki">
+              </form>
         </div>
       </div>
     </div>
