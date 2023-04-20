@@ -66,6 +66,7 @@ app.get("/successful", async (req, res) => {
   } else {
     res.sendFile(__dirname + "/public/error.html");
   }
+  isLoggedIn = false;
 });
 
 app.get("/sort", async (req, res) => {
@@ -73,6 +74,7 @@ app.get("/sort", async (req, res) => {
   const { teacher } = req.query;
   const dataSorted = await collectionF.find({ teacher: teacher }).toArray();
   res.render("sorted.ejs", { dataSorted, dataTeachers });
+  isLoggedIn = false;
 });
 
 app.post("/add", (req, res) => {
@@ -90,6 +92,7 @@ app.post("/add", (req, res) => {
   } else {
     res.sendFile(__dirname + "/public/error.html");
   }
+  isLoggedIn = false;
 });
 
 // Start server

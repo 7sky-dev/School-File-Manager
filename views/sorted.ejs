@@ -50,26 +50,24 @@
       </div>
       <div class="w-25 h-100 d-flex flex-column">
         <div class="mt-4">
-          <p class="text-center fs-1">Instrukcja</p>
-          <br>
-          <ol>
-            <li>abc</li>
-            <li>abc</li>
-            <li>abc</li>
-            <li>abc</li>
-            <li>abc</li>
-            <li>abc</li>
-          </ol>
+          <h1 class="text-center text-warning"><b>Instrukcja</b></h1>
+          <ul style="width: 95%;">
+            <li>Po lewej na środku strony znajduje się lista wszystkich plików dodanych przez nauczycieli.</li>
+            <br />
+            <li>W celu sortowania plików według nauczyciela, wybierz go z listy i naciśnij przycisk <span class="btn btn-warning  ml-2">Sortuj</span></li>
+            <br />
+            <li>Aby udostępnić plik, poniżej znajduje się formularz w którym należy zaznaczyć swoje imię i nazwisko, a następnie wybrać plik z komputera, które chcemy wysłać na stronę. Po naciśnięciu <span class="btn btn-warning  ml-2">Dodaj plik</span> zostanie on dodany.</li>
+          </ul>
         </div>
         <div class="mt-auto mb-auto text-center">
             <form ref="uploadForm" id="uploadForm" method="POST" action="/add" encType="multipart/form-data" class="d-flex flex-column align-items-center justify-content-center">
-                <select name="teacher" class="pl-2 pr-2 pt-2 pb-2 mt-2 rounded">
+                <select name="teacher" class="pl-2 pr-2 pt-2 pb-2 mb-2 mt-2 rounded">
                   <% for(let i=0; i<dataTeachers.length; i++) {%>
                     <option value="<%=dataTeachers[i].teacher%>"><%=dataTeachers[i].teacher%></option>
                   <% } %>
                 </select>
                 <input type="file" name="fileName" class="w-75">
-                <input type="submit" class="btn btn-warning mt-2 w-75" value="Dodaj pliki">
+                <input type="submit" class="btn btn-warning mt-2 w-75" value="Dodaj plik">
               </form>
         </div>
       </div>
