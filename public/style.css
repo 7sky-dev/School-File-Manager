@@ -1,43 +1,43 @@
-body{
-    background-color:#111111;
-    font-family: 'Montserrat', sans-serif;
-    color: white;
+body {
+  background-color: #111111;
+  font-family: "Montserrat", sans-serif;
+  color: white;
 }
 
-.main{
-    width: 100vw;
-    height: 100vh;
+.main {
+  width: 100vw;
+  height: 100vh;
 }
 
-.login,.instrukcja{
-    background-color: #181717;
+.login,
+.instrukcja {
+  background-color: #181717;
 }
 
-.login{
-    width: 500px;
+.login {
+  width: 500px;
 }
-.logowanie{
-    width: 66vw;
-}
-
-
-ol{
-    font-size:25px;
-    font-family:Sans-serif;
-    padding-left:100px; 
+.logowanie {
+  width: 66vw;
 }
 
-.split{
-    height: 100%;
-    width: 100%;
+ol {
+  font-size: 1.5rem;
+  font-family: Sans-serif;
+  padding-left: 100px;
 }
 
-h1{
-    text-align: center;
+.split {
+  height: 100%;
+  width: 100%;
 }
 
-@media only screen and (max-width: 1250px)  {
-    .main{
-        flex-direction: column;
-    }
+h1 {
+  text-align: center;
+}
+
+@media only screen and (max-width: 1250px) {
+  .main {
+    flex-direction: column;
+  }
 }

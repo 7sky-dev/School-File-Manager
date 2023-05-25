@@ -21,30 +21,31 @@
   <body>
     <div id="root" class="d-flex flex-row">
       <div class="w-75 h-100 d-flex flex-column align-items-center">
-        <div class="pl-3 pr-3 pt-3 pb-3 mt-4 mb-4 rounded w-75 d-flex flex-row justify-content-center align-items-center" style="background-color: #332e30">
-          <form class="d-flex flex-row w-100" action="/sort" style="margin-block-end: 0 !important;">
-          <div class="d-flex justify-content-center align-items-center m-auto">Sortowanie wg. nauczyciela:</div>
-          <div class="d-flex justify-content-center align-items-center m-auto">
-            <select name="teacher" class="pl-4 pr-4 pt-2 pb-2 rounded w-100">
-              <% for(let i=0; i<dataTeachers.length; i++) {%>
-                <option value="<%=dataTeachers[i].teacher%>"><%=dataTeachers[i].teacher%></option>
-              <% } %>
-            </select>
-          </div>
-          <div class="d-flex justify-content-center align-items-center m-auto">
-            <input type="submit" class="btn btn-warning" value="Sortuj">
-          </div>
-        </form>
-        </div>
-        <div>
-          <ul>
-            <% for(let i=0; i<dataSorted.length; i++) {%>
-              <li>
-                <b><%=dataSorted[i].teacher%>:</b>
-                <a href="files/<%=dataSorted[i].name%>"><%=dataSorted[i].name%></a>
-              </li>
-            <% } %>
-          </ul>
+        <div class="mt-5">
+            <h2>Pliki dostępne w serwisie:</h2>
+            <table class="table text-white">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nauczyciel</th>
+                    <th scope="col">Nazwa pliku</th>
+                    <th scope="col">Działanie</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% for(let i=0; i<dataFiles.length; i++) {%>
+                        <tr>
+                            <form method="POST" action="/del">
+                                <td> <%=i%><input name="file" class="invisible"  type="text" value="<%=dataFiles[i].name%>"></td>
+                                <td><b><%=dataFiles[i].teacher%>:</b></td>
+                                <td><a href="files/<%=dataFiles[i].name%>"><%=dataFiles[i].name%></a></td>
+                                <td class="text-center"><input type="submit" value="X" class="btn btn-danger text-center"></input></td>
+                            </form>
+                        </tr>
+                      <% } %>
+                </tbody>
+              </table>
+            
         </div>
       </div>
       <div class="w-25 h-100 d-flex flex-column">
@@ -58,17 +59,7 @@
             <li>Aby udostępnić plik, poniżej znajduje się formularz w którym należy zaznaczyć swoje imię i nazwisko, następnie wybieramy plik z komputera, który chcemy wysłać. Po naciśnięciu <span class="btn btn-warning  ml-2" style="font-size: 0.8rem;">Dodaj plik</span> zostanie on dodany na stronę.</li>
           </ul>
         </div>
-        <div class="mt-auto mb-auto text-center">
-            <form ref="uploadForm" id="uploadForm" method="POST" action="/add" encType="multipart/form-data" class="d-flex flex-column align-items-center justify-content-center">
-                <select name="teacher" class="pl-2 pr-2 pt-2 pb-2 mb-2 mt-2 rounded">
-                  <% for(let i=0; i<dataTeachers.length; i++) {%>
-                    <option value="<%=dataTeachers[i].teacher%>"><%=dataTeachers[i].teacher%></option>
-                  <% } %>
-                </select>
-                <input type="file" name="fileName" class="w-75">
-                <input type="submit" class="btn btn-warning mt-2 w-75" value="Dodaj plik">
-              </form>
-        </div>
+        
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

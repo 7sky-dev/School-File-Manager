@@ -21,22 +21,22 @@
   <body>
     <div id="root" class="d-flex flex-row">
       <div class="w-75 h-100 d-flex flex-column align-items-center">
-        <div class="pl-3 pr-3 pt-3 pb-3 mt-4 mb-4 rounded w-75" style="background-color: #332e30">
-          <form class="d-flex flex-row" action="/sort">
-          <div class="m-auto">Sortowanie wg. nauczyciela:</div>
-          <div class="m-auto">
-            <select name="teacher" class="pl-4 pr-4 pt-2 pb-2 rounded">
+        <div class="pl-3 pr-3 pt-3 pb-3 mt-4 mb-4 rounded w-75 d-flex flex-row justify-content-center align-items-center" style="background-color: #332e30">
+          <form class="d-flex flex-row w-100" action="/sort" style="margin-block-end: 0 !important;">
+          <div class="d-flex justify-content-center align-items-center m-auto">Sortowanie wg. nauczyciela:</div>
+          <div class="d-flex justify-content-center align-items-center m-auto">
+            <select name="teacher" class="pl-4 pr-4 pt-2 pb-2 rounded w-100">
               <% for(let i=0; i<dataTeachers.length; i++) {%>
                 <option value="<%=dataTeachers[i].teacher%>"><%=dataTeachers[i].teacher%></option>
               <% } %>
             </select>
           </div>
-          <div class="m-auto">
+          <div class="d-flex justify-content-center align-items-center m-auto">
             <input type="submit" class="btn btn-warning" value="Sortuj">
           </div>
         </form>
         </div>
-        <div class="text-center">
+        <div>
           <ul>
             <% for(let i=0; i<dataFiles.length; i++) {%>
               <li>
@@ -51,11 +51,11 @@
         <div class="mt-4">
           <h1 class="text-center text-warning"><b>Instrukcja</b></h1>
           <ul style="width: 95%;">
-            <li>Po lewej na środku strony znajduje się lista wszystkich plików dodanych przez nauczycieli.</li>
+            <li>Po lewej stronie na środku strony znajduje się lista wszystkich plików dodanych przez nauczycieli.</li>
             <br />
-            <li>W celu sortowania plików według nauczyciela, wybierz go z listy i naciśnij przycisk <span class="btn btn-warning  ml-2">Sortuj</span></li>
+            <li>W celu sortowania plików według nauczyciela, wybierz go z listy i naciśnij przycisk <span class="btn btn-warning  ml-2" style="font-size: 0.8rem;">Sortuj</span></li>
             <br />
-            <li>Aby udostępnić plik, poniżej znajduje się formularz w którym należy zaznaczyć swoje imię i nazwisko, a następnie wybrać plik z komputera, które chcemy wysłać na stronę. Po naciśnięciu <span class="btn btn-warning  ml-2">Dodaj plik</span> zostanie on dodany.</li>
+            <li>Aby udostępnić plik, poniżej znajduje się formularz w którym należy zaznaczyć swoje imię i nazwisko, następnie wybieramy plik z komputera, który chcemy wysłać. Po naciśnięciu <span class="btn btn-warning  ml-2" style="font-size: 0.8rem;">Dodaj plik</span> zostanie on dodany na stronę.</li>
           </ul>
         </div>
         <div class="mt-auto mb-auto text-center">
