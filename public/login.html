@@ -22,9 +22,16 @@
                     <div class="input-group mb-3 mt-4">
                         <input type="password" class="form-control" name="password" placeholder="Hasło" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                          <input type="submit" class="btn btn-warning" value="Zaloguj"></input>
+                          <input type="submit" class="btn btn-warning" value="Zaloguj" />
                         </div>
                       </div>
+                    <div id="error"></div>
+                    <script>
+                        const error = new URLSearchParams(window.location.search).get('error');
+                        if(error) {
+                            document.getElementById('error').innerHTML = `<div style="color: red">${error}</div>`;
+                        }
+                    </script>
                 </form>
             </div>
         </div>

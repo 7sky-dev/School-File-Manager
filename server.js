@@ -4,6 +4,8 @@ const express = require("express");
 const upload = require("express-fileupload");
 const bcrypt = require("bcrypt");
 const { MongoClient } = require("mongodb");
+const {authRouter, currentUser, requireAuth, requireAdmin} = require("./auth");
+const cookieSession = require("cookie-session");
 const app = express();
 const port = process.env.PORT || 4444;
 const url = process.env.URL || "mongodb://127.0.0.1:27017";
@@ -16,16 +18,13 @@ const client = new MongoClient(url);
 const collectionF = client.db(dbName).collection(collectionFiles);
 const collectionT = client.db(dbName).collection(collectionTeachers);
 
-async function connectToDatabase() {
-  try {
-    await client.connect();
-    console.log("Connected to MongoDB");
-  } catch (err) {
-    console.log(`Error connecting to MongoDB: ${err}`);
-  }
-}
+const connectToDatabase = async () => await client.connect();
 
-connectToDatabase();
+connectToDatabase().then(() => {
+  console.log("Connected to MongoDB");
+}).catch((err) => {
+    console.log(`Error connecting to MongoDB: ${err}`);
+});
 
 // Set up Express
 app.use(express.static("public"));
@@ -33,62 +32,61 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(upload());
+app.use(
+    cookieSession({
+      signed: false,
+      secure: false
+    })
+);
 
-var admin = false;
+app.use(authRouter);
+app.use(currentUser);
 
 // Routes
 app.get("/", (req, res) => {
-  admin = false;
   res.sendFile(__dirname + "/public/login.html");
 });
 
-app.post("/del", async (req, res) => {
-  if (admin) {
+app.post("/del", requireAdmin, async (req, res) => {
     await collectionF.deleteOne({ name: req.body.file });
     await fs.unlinkSync(__dirname + "/public/files/" + req.body.file);
 
     res.redirect("/adminpanel");
-  }
 });
 
-app.post("/login", async (req, res) => {
-  const password = req.body.password;
-  try {
-    bcrypt.compare(password, process.env.ADMIN_HASH, (err, result) => {
-      if (result) {
-        admin = true;
-        res.redirect("/admincheck");
-      }
-    });
-  } catch (e) {}
-  bcrypt.compare(password, process.env.HASH, (err, result) => {
-    if (result) {
-      res.redirect("/successful");
-    } else {
-      res.sendFile(__dirname + "/public/error.html");
-    }
-  });
-});
+// app.post("/login", async (req, res) => {
+//   const password = req.body.password;
+//   try {
+//     bcrypt.compare(password, process.env.ADMIN_HASH, (err, result) => {
+//       if (result) {
+//         admin = true;
+//         res.redirect("/admincheck");
+//       }
+//     });
+//   } catch (e) {}
+//   bcrypt.compare(password, process.env.HASH, (err, result) => {
+//     if (result) {
+//       res.redirect("/successful");
+//     } else {
+//       res.sendFile(__dirname + "/public/error.html");
+//     }
+//   });
+// });
 
-app.get("/admincheck", async (req, res) => {
-  if (admin) {
-    res.redirect("/adminpanel");
-  } else {
-    res.sendFile(__dirname + "/public/error.html");
-  }
-});
+// app.get("/admincheck", async (req, res) => {
+//   if (admin) {
+//     res.redirect("/adminpanel");
+//   } else {
+//     res.sendFile(__dirname + "/public/error.html");
+//   }
+// });
 
-app.get("/adminpanel", async (req, res) => {
-  if (admin) {
+app.get("/adminpanel", requireAdmin, async (req, res) => {
     const dataFiles = await collectionF.find().toArray();
     res.render("admin.ejs", { dataFiles });
-  } else {
-    res.sendFile(__dirname + "/public/error.html");
-  }
 });
 
-app.get("/successful", async (req, res) => {
-  admin = false;
+app.get("/successful", requireAuth, async (req, res) => {
   try {
     const dataFiles = await collectionF.find().sort({ teacher: 1 }).toArray();
     const dataTeachers = await collectionT.find().toArray();
@@ -99,16 +97,14 @@ app.get("/successful", async (req, res) => {
   }
 });
 
-app.get("/sort", async (req, res) => {
-  admin = false;
+app.get("/sort", requireAuth, async (req, res) => {
   const dataTeachers = await collectionT.find().toArray();
   const { teacher } = req.query;
   const dataSorted = await collectionF.find({ teacher: teacher }).toArray();
   res.render("sorted.ejs", { dataSorted, dataTeachers });
 });
 
-app.post("/add", async (req, res) => {
-  admin = false;
+app.post("/add", requireAuth, async (req, res) => {
   const teacher = req.body.teacher;
   if (req.files) {
     const file = req.files.fileName;
