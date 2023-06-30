@@ -43,10 +43,6 @@ const requireAdmin = (
 
 const router = express.Router();
 
-router.post("/test", (req, res) => {
-    res.send({test: bcrypt.hashSync("test1234", 10)});
-});
-
 router.post("/login", async (req, res) => {
     const {password} = req.body;
     let admin = false;
